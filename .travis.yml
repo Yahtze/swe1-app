@@ -33,6 +33,7 @@ deploy:
   region: "us-west-2"
   app: "djangotutorial-dev-v2"
   env: "djangotutorial-dev-v2-dev"
+  bucket: "elasticbeanstalk-us-west-2-908324163690"
   skip_cleanup: true
   on:
     branch: main
