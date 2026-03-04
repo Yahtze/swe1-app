@@ -31,11 +31,12 @@ deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: elasticbeanstalk-us-west-2-908324163690
   region: us-west-2
+  bucket_name: elasticbeanstalk-us-west-2-908324163690
   app: djangotutorial-dev-v2
   env: djangotutorial-dev-v2-dev
   skip_cleanup: true
   on:
     branch: main
+
 
