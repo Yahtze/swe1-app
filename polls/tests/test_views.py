@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from polls.models import Question
 
+
 def create_question(question_text, days):
     """
     Create a question with the given `question_text` and published the
@@ -15,6 +16,7 @@ def create_question(question_text, days):
     time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time)
 
+
 class QuestionIndexViewTests(TestCase):
     def test_past_question(self):
         """
@@ -22,11 +24,12 @@ class QuestionIndexViewTests(TestCase):
         index page.
         """
         question = create_question(question_text="Past question.", days=-30)
-        response = self.client.get(reverse('polls:index'))
+        response = self.client.get(reverse("polls:index"))
         self.assertQuerySetEqual(
-            response.context['latest_question_list'],
+            response.context["latest_question_list"],
             [question],
         )
+
 
 class QuestionDetailViewTests(TestCase):
     def test_past_question(self):
@@ -34,7 +37,7 @@ class QuestionDetailViewTests(TestCase):
         The detail view of a question with a pub_date in the past
         displays the question's text.
         """
-        past_question = create_question(question_text='Past Question.', days=-5)
-        url = reverse('polls:detail', args=(past_question.id,))
+        past_question = create_question(question_text="Past Question.", days=-5)
+        url = reverse("polls:detail", args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)

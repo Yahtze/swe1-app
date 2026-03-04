@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from polls.models import Question, Choice
 
+
 class QuestionModelTests(TestCase):
 
     def test_was_published_recently_with_future_question(self):
@@ -37,6 +38,7 @@ class QuestionModelTests(TestCase):
     def test_question_str(self):
         question = Question(question_text="What's up?")
         self.assertEqual(str(question), "What's up?")
+
 
 class ChoiceModelTests(TestCase):
 

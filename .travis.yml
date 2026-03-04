@@ -7,7 +7,7 @@ services:
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=your_project.settings
+    - DJANGO_SETTINGS_MODULE=mysite.settings
     - DATABASE_URL=postgres://postgres@localhost:5432/travis_ci_test
 
 before_install:
@@ -22,7 +22,7 @@ before_script:
 script:
   - black --check .
   - flake8 .
-  - coverage run manage.py test
+  - coverage run --source='polls' manage.py test
   - coverage report
   - coveralls
 
