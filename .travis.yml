@@ -30,10 +30,10 @@ deploy:
   provider: elasticbeanstalk
   access_key_id: "$AWS_ACCESS_KEY_ID"
   secret_access_key: "$AWS_SECRET_ACCESS_KEY"
-  region: "us-east-1"
-  app: "your-eb-app-name"
-  env: "your-eb-environment-name"
-  bucket_name: "elasticbeanstalk-us-east-1-xxxx"
+  region: "us-west-2"
+  app: "djangotutorial-dev-v2"
+  env: "djangotutorial-dev-v2-dev"
+  bucket_name: "elasticbeanstalk-us-west-2-908324163690"
   on:
     branch: main
 
