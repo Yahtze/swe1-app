@@ -17,12 +17,6 @@ before_install:
 install:
   - pip install -r requirements.txt
 
-before_deploy:
-  - echo "Deploying to Elastic Beanstalk"
-  - echo "AWS Region: $AWS_DEFAULT_REGION"
-  - echo "Bucket Name: elasticbeanstalk-us-west-2-908324163690"
-  - aws s3 ls s3://elasticbeanstalk-us-west-2-908324163690 --region us-west-2
-
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 
@@ -35,12 +29,12 @@ script:
 
 deploy:
   provider: elasticbeanstalk
-  access_key_id: "$AWS_ACCESS_KEY_ID"
-  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
-  region: "us-west-2"
-  app: "djangotutorial-dev-v2"
-  env: "djangotutorial-dev-v2-dev"
-  bucket: "elasticbeanstalk-us-west-2-908324163690"
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  region: us-west-2
+  app: djangotutorial-dev-v2
+  env: djangotutorial-dev-v2-dev
+  bucket: elasticbeanstalk-us-west-2-908324163690
   skip_cleanup: true
   on:
     branch: main
