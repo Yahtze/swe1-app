@@ -28,15 +28,21 @@ script:
   - coveralls
 
 deploy:
-  provider: elasticbeanstalk
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  region: us-west-2
-  bucket_name: elasticbeanstalk-us-west-2-908324163690
-  app: djangotutorial-dev-v2
-  env: djangotutorial-dev-v2-dev
-  skip_cleanup: true
+  provider: script
+  script: |
+    zip -r app.zip . -x "*.git*"
+    aws s3 cp app.zip s3://elasticbeanstalk-us-west-2-908324163690/app.zip --region us-west-2
+    aws elasticbeanstalk create-application-version \
+        --application-name djangotutorial-dev-v2 \
+        --version-label v$TRAVIS_BUILD_NUMBER \
+        --source-bundle S3Bucket=elasticbeanstalk-us-west-2-908324163690,S3Key=app.zip \
+        --region us-west-2
+    aws elasticbeanstalk update-environment \
+        --environment-name djangotutorial-dev-v2-dev \
+        --version-label v$TRAVIS_BUILD_NUMBER \
+        --region us-west-2
   on:
     branch: main
+
 
 
