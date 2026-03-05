@@ -1,15 +1,6 @@
 #!/bin/bash
 set -e
 
-# Debug: verify credentials are present (safe — only shows length)
-echo "AWS_ACCESS_KEY_ID length: ${#AWS_ACCESS_KEY_ID}"
-echo "AWS_SECRET_ACCESS_KEY length: ${#AWS_SECRET_ACCESS_KEY}"
-
-if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-  echo "ERROR: AWS credentials are not set!"
-  exit 1
-fi
-
 APP_NAME="djangotutorial-dev-v2"
 ENV_NAME="djangotutorial-dev-v2-dev"
 BUCKET="elasticbeanstalk-us-west-2-908324163690"
