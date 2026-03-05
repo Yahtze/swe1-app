@@ -24,10 +24,13 @@ class QuestionIndexViewTests(TestCase):
         index page.
         """
         question = create_question(question_text="Past question.", days=-30)
+        basic_poll = Question.objects.get(
+            question_text="What is your favorite programming language?"
+        )
         response = self.client.get(reverse("polls:index"))
         self.assertQuerySetEqual(
             response.context["latest_question_list"],
-            [question],
+            [basic_poll, question],
         )
 
 
