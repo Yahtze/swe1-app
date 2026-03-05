@@ -29,6 +29,7 @@ script:
 
 deploy:
   provider: elasticbeanstalk
+  edge: true
   access_key_id: $AWS_ACCESS_KEY_ID          # Set in Travis CI environment variables
   secret_access_key: $AWS_SECRET_ACCESS_KEY  # Set in Travis CI environment variables
   region: "us-west-2"                        # Your AWS region
