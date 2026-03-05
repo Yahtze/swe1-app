@@ -27,19 +27,17 @@ script:
   - coverage report
   - coveralls
 
+before_deploy:
+  - pip install awscli
+  - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+  - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+  - aws configure set default.region us-west-2
+
 deploy:
-  provider: elasticbeanstalk
-  edge: true
-  access_key_id: $AWS_ACCESS_KEY_ID          # Set in Travis CI environment variables
-  secret_access_key: $AWS_SECRET_ACCESS_KEY  # Set in Travis CI environment variables
-  region: "us-west-2"                        # Your AWS region
-  app: "djangotutorial-dev-v2"                       # Your Elastic Beanstalk application name
-  env: "djangotutorial-dev-v2-dev"                       # Your Elastic Beanstalk environment name
-  bucket_name: "elasticbeanstalk-us-west-2-908324163690"             # S3 bucket for deployment artifacts
-  bucket_path: "djangotutorial-dev-v2"              # Optional: path within the bucket
+  provider: script
+  script: bash deploy.sh
   on:
     branch: main
-  skip_cleanup: true
 
 
 
